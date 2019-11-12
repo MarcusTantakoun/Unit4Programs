@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class clientGUI extends javax.swing.JFrame {
+public class searchGUI extends javax.swing.JFrame {
     
     ISSStudent iss[] = new ISSStudent[100];
 
-    public clientGUI() {
+    public searchGUI() {
         initComponents();
         String name, address;
         int id;
-        ISSStudent iss[] = new ISSStudent[100];
         try {
             Scanner scan = new Scanner(new File("studata.txt"));
             for (int i = 0; i < 100; i++) {
@@ -49,23 +48,17 @@ public class clientGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        display = new javax.swing.JTextField();
         searchbtn = new javax.swing.JButton();
         clearbtn = new javax.swing.JButton();
         txtid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         quitbtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        display = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 51));
-
-        display.setEditable(false);
-        display.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayActionPerformed(evt);
-            }
-        });
 
         searchbtn.setText("SEARCH");
         searchbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +80,7 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
         jLabel1.setText("Enter Student ID Number");
 
         quitbtn.setText("QUIT");
@@ -97,26 +90,33 @@ public class clientGUI extends javax.swing.JFrame {
             }
         });
 
+        display.setEditable(false);
+        display.setColumns(20);
+        display.setRows(5);
+        jScrollPane1.setViewportView(display);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(display)
-                    .addComponent(txtid, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(searchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(clearbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(quitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(247, 247, 247))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtid)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(searchbtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(clearbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(quitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,16 +130,16 @@ public class clientGUI extends javax.swing.JFrame {
                     .addComponent(searchbtn)
                     .addComponent(clearbtn)
                     .addComponent(quitbtn))
-                .addGap(18, 18, 18)
-                .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,31 +149,20 @@ public class clientGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void displayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayActionPerformed
-
-    }//GEN-LAST:event_displayActionPerformed
-
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
-        //int sid = input.nextInt();
-        //ISSStudent temp = new ISSStudent("", "", sid);
-        //int loc = binarySearch(iss, temp);
-        //if (loc > -1) {
-         //   System.out.println(iss[loc]);
-        //}
-    //}
         
         int id = Integer.parseInt(txtid.getText());
         ISSStudent temp = new ISSStudent(null, null, id);
 
         int result = search(iss, temp);
-        if (result > -1) {
+        if (result >= 0) {
             txtid.setEditable(false);
             searchbtn.setEnabled(false);
-            display.setText(iss[result].toString());
+            display.setText(iss[result].toString() + "\n\n  Press CLEAR");
         } else {
             txtid.setEditable(false);
             searchbtn.setEnabled(false);
-            display.setText("Student not found\nPlease press clear");
+            display.setText("  STUDENT NOT FOUND.\n Please press CLEAR");
         }
         searchbtn.setEnabled(false);
     }//GEN-LAST:event_searchbtnActionPerformed
@@ -197,16 +186,17 @@ public class clientGUI extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new clientGUI().setVisible(true);
+                new searchGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearbtn;
-    private javax.swing.JTextField display;
+    private javax.swing.JTextArea display;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton quitbtn;
     private javax.swing.JButton searchbtn;
     private javax.swing.JTextField txtid;
