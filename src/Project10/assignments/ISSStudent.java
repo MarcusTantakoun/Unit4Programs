@@ -1,5 +1,5 @@
 
-package Project10.searchAssignment;
+package Project10.assignments;
 
 public class ISSStudent implements Comparable{
     private String name;

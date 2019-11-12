@@ -1,17 +1,22 @@
-package Project10.searchAssignment;
+package Project10.assignments;
 
 import javax.swing.DefaultListModel;
 
 public class sortGUI extends javax.swing.JFrame {
 
     DefaultListModel model; //holds data for the list
-    int nums[] = new int[50000];
+    int nums[] = new int[50000]; //generate 50000 numbers
 
     public sortGUI() {
         initComponents();
         //connect model to list
         model = new DefaultListModel();
         numberList.setModel(model); //connects model to list
+        //all sorting buttons are disabled
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        quickSort.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,7 +32,7 @@ public class sortGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         bubbleSort = new javax.swing.JButton();
         selectionSort = new javax.swing.JButton();
-        insertionSort1 = new javax.swing.JButton();
+        insertionSort = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         quickSort = new javax.swing.JButton();
@@ -37,7 +42,7 @@ public class sortGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setBackground(new java.awt.Color(255, 153, 153));
 
         jScrollPane1.setViewportView(numberList);
 
@@ -48,6 +53,18 @@ public class sortGUI extends javax.swing.JFrame {
             }
         });
 
+        timebox.setEditable(false);
+        timebox.setBackground(new java.awt.Color(51, 51, 51));
+        timebox.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        timebox.setForeground(new java.awt.Color(255, 255, 255));
+        timebox.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        timebox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeboxActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -67,10 +84,10 @@ public class sortGUI extends javax.swing.JFrame {
             }
         });
 
-        insertionSort1.setText("Insertion Sort");
-        insertionSort1.addActionListener(new java.awt.event.ActionListener() {
+        insertionSort.setText("Insertion Sort");
+        insertionSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertionSort1ActionPerformed(evt);
+                insertionSortActionPerformed(evt);
             }
         });
 
@@ -84,7 +101,7 @@ public class sortGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bubbleSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(selectionSort, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(insertionSort1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(insertionSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,10 +114,11 @@ public class sortGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectionSort)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(insertionSort1)
+                .addComponent(insertionSort)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,6 +152,7 @@ public class sortGUI extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         clearListbtn.setText("Clear List");
@@ -168,7 +187,7 @@ public class sortGUI extends javax.swing.JFrame {
                 .addComponent(clearListbtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quitbtn)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -177,8 +196,8 @@ public class sortGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(generatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(timebox)
@@ -192,18 +211,18 @@ public class sortGUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(generatebtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(13, 13, 13)
                         .addComponent(timebox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,12 +240,17 @@ public class sortGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatebtnActionPerformed
-        model.clear();
-        int nums[] = new int[50000];
-        for (int i = 0; i < 50000; i++) {
+        //generates 50000 numbers from 1 to 50000
+        for (int i = 0; i < 50000; i++) { //(range)
             nums[i] = (int) (Math.random() * 50000 + 1);
             model.addElement(nums[i]);
         }
+        generatebtn.setEnabled(false);
+        //all sorting buttons are enabled once generate button is clicked
+        selectionSort.setEnabled(true);
+        insertionSort.setEnabled(true);
+        bubbleSort.setEnabled(true);
+        quickSort.setEnabled(true);
     }//GEN-LAST:event_generatebtnActionPerformed
 
     private void quitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitbtnActionPerformed
@@ -235,35 +259,75 @@ public class sortGUI extends javax.swing.JFrame {
 
     private void bubbleSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bubbleSortActionPerformed
         model.clear();
-        bubbleSort(nums);
-        model.addElement(nums);
+        //start time
+        long startTime = System.nanoTime();
+        bubbleSort(nums); //run method
+        //print numbers
+        for (int i = 0; i < 50000; i++) {
+            model.addElement(nums[i]);
+        }
+        //end time method execution
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;
+        timebox.setText("" + duration + " ms"); //print time box
+        
+        //disable all buttons - forces user to clear list or quit
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        quickSort.setEnabled(false);
     }//GEN-LAST:event_bubbleSortActionPerformed
 
     private void selectionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionSortActionPerformed
         model.clear();
+        long startTime = System.nanoTime();
         selectionSort(nums);
         for (int i = 0; i < 50000; i++) {
             model.addElement(nums[i]);
         }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;
+        timebox.setText("" + duration + " ms");
+        
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        quickSort.setEnabled(false);
     }//GEN-LAST:event_selectionSortActionPerformed
 
-    private void insertionSort1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertionSort1ActionPerformed
+    private void insertionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertionSortActionPerformed
         model.clear();
+        long startTime = System.nanoTime();
         insertionSort(nums);
         for (int i = 0; i < 50000; i++) {
             model.addElement(nums[i]);
         }
-    }//GEN-LAST:event_insertionSort1ActionPerformed
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;
+        timebox.setText("" + duration + " ms");
+        
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        quickSort.setEnabled(false);
+    }//GEN-LAST:event_insertionSortActionPerformed
 
     private void quickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickSortActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_quickSortActionPerformed
 
     private void clearListbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearListbtnActionPerformed
+        //resets whole code
         model.clear();
         model = new DefaultListModel();
         numberList.setModel(model);
+        generatebtn.setEnabled(true);
+        timebox.setText("");
     }//GEN-LAST:event_clearListbtnActionPerformed
+
+    private void timeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeboxActionPerformed
+        
+    }//GEN-LAST:event_timeboxActionPerformed
 
     public static void main(String args[]) {
 
@@ -353,7 +417,7 @@ public class sortGUI extends javax.swing.JFrame {
     private javax.swing.JButton bubbleSort;
     private javax.swing.JButton clearListbtn;
     private javax.swing.JButton generatebtn;
-    private javax.swing.JButton insertionSort1;
+    private javax.swing.JButton insertionSort;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

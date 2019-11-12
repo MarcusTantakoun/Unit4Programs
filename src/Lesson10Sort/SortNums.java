@@ -12,7 +12,9 @@ public class SortNums {
                 System.out.print(nums[i] + ", ");
             }
         }
-        selectionSort(nums);
+        //selectionSort(nums)
+        //bubbleSort(nums);
+        insertionSort(nums);
         System.out.println("\n\n-----Selection-----\n\n");
         for (int i = 0; i < 100; i++) {
             if (i % 20 == 0 && i != 0) {
@@ -52,5 +54,50 @@ public class SortNums {
         a[x] = a[y];
         a[y] = temp;
     }
+
+    public static void bubbleSort(int[] a) {
+        int k = 0;
+        boolean exchangeMade = true;
+        // Make up to n - 1 passes through array, exit 
+        //early if no exchanges are made on previous pass
+
+        while ((k < a.length - 1) && exchangeMade) {
+            exchangeMade = false;
+            k++;
+            for (int j = 0; j < a.length - k; j++) {
+                if (a[j] > a[j + 1]) {
+                    swap(a, j, j + 1);
+                    exchangeMade = true;
+                }//end if
+            }//end for
+        }//end while
+    }
+
+    public static void insertionSort(int a[]) {
+        int itemToInsert, j;
+        boolean stillLooking;
+
+        //on the kth pass, pass item k upwards in list
+        //and insert it in its proper place amoung the
+        //first k entries in an array
+        for (int k = 1; k < a.length; k++) {
+            //move backwards through list, looking for
+            //the right place to insert a[k];
+            itemToInsert = a[k];
+            j = k - 1;
+            stillLooking = true;
+            while (j >= 0 && stillLooking) {
+                if (itemToInsert < a[j]) {
+                    //move item higher
+                    a[j + 1] = a[j];
+                    j--;
+                } else {
+                    //we have found new home for a[k];
+                    stillLooking = false;
+                }//end else// j+1 is where the item goes
+                a[j + 1] = itemToInsert;
+            }//end while
+        }//end for
+    }//end method
 
 }

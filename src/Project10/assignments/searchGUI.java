@@ -1,4 +1,4 @@
-package Project10.searchAssignment;
+package Project10.assignments;
 
 import java.io.File;
 import java.io.IOException;
