@@ -162,7 +162,7 @@ public class searchGUI extends javax.swing.JFrame {
         } else {
             txtid.setEditable(false);
             searchbtn.setEnabled(false);
-            display.setText("  STUDENT NOT FOUND.\n Please press CLEAR");
+            display.setText(" STUDENT NOT FOUND.\n Please press CLEAR");
         }
         searchbtn.setEnabled(false);
     }//GEN-LAST:event_searchbtnActionPerformed
