@@ -13,6 +13,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="exitbtn">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/exit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Exit"/>
               </Properties>
               <Events>
@@ -28,6 +31,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="clearbtn">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+C"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/exit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Clear"/>
               </Properties>
               <Events>
@@ -36,6 +45,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="addbtn">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/insert.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
@@ -44,6 +56,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deletebtn">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/delete.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
@@ -57,18 +72,33 @@
             <Property name="text" type="java.lang.String" value="Filter"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="showAll">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/all.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Show All"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showAllActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="malebtn">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/male.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Male"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="malebtnActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="femalebtn">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Project10/assignments/female.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Female"/>
               </Properties>
               <Events>
@@ -196,6 +226,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nameListMouseClicked"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -219,6 +252,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="nameBox">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="ageBox">
         </Component>
@@ -239,9 +275,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="optMale" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="optFemale" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="21" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -251,8 +287,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="optMale" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="optFemale" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="25" max="32767" attributes="0"/>
                   </Group>
@@ -260,7 +296,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="optMale">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -275,10 +311,10 @@
                 <Property name="actionCommand" type="java.lang.String" value="M"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optMaleActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="optFemale">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -293,7 +329,7 @@
                 <Property name="actionCommand" type="java.lang.String" value="F"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="optFemaleActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

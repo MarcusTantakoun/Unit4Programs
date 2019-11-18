@@ -17,6 +17,14 @@ public class Person implements Comparable{
         return name;
     }
     
+    public String getGender(){
+        return gender;
+    }
+    
+    public int getAge(){
+        return age;
+    }
+    
     public String toString(){
         //ex: Bob: age 12, male
         return name + ": age " + age + ", " + gender;
@@ -25,5 +33,29 @@ public class Person implements Comparable{
     public int compareTo(Object t) {
         String othername = ((Person)t).getName();
         return name.compareTo(othername);
+    }
+    
+    public final boolean setName(String nm) {
+        boolean nameBlank = nm.equals("");
+        if (nameBlank) {
+            return false;
+        } else {
+            name = nm;
+            return true;
+        }
+    }    
+    
+    public final boolean setAge(int a) {
+        boolean ageBlank = (a<0 || age >100);
+        if (ageBlank) {
+            return false;
+        } else {
+            age = a;
+            return true;
+        }
+    }
+
+    public final boolean setGender(){
+        boolean genderBlank = optmale.
     }
 }

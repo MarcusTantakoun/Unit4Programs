@@ -2,23 +2,33 @@ package Project10.assignments;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class PersonListGUI extends javax.swing.JFrame {
 
-    ArrayList <Person> people = new ArrayList();
+    ArrayList<Person> people = new ArrayList();
     DefaultListModel model = new DefaultListModel();
-    
+
     public PersonListGUI() {
         initComponents();
-        people.add(new Person("Bob","M",25));
-        people.add(new Person("Fran","F",55));
-        people.add(new Person("Mike","M",15));
-        people.add(new Person("Sue","F",30));
+        people.add(new Person("Bob", "M", 25));
+        people.add(new Person("Fran", "F", 55));
+        people.add(new Person("Mike", "M", 15));
+        people.add(new Person("Sue", "F", 30));
         nameList.setModel(model);
         for (Person p : people) {
             model.addElement(p.getName());
         }
-        
+    }
+
+    public void show(Person p) {
+        nameBox.setText(p.getName());
+        ageBox.setText("" + p.getAge());
+        if (p.getGender().equals("M")) {
+            optMale.setSelected(true);
+        } else {
+            optFemale.setSelected(true);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -34,8 +44,8 @@ public class PersonListGUI extends javax.swing.JFrame {
         nameBox = new javax.swing.JTextField();
         ageBox = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        optMale = new javax.swing.JRadioButton();
+        optFemale = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         filebtn = new javax.swing.JMenu();
         exitbtn = new javax.swing.JMenuItem();
@@ -44,7 +54,7 @@ public class PersonListGUI extends javax.swing.JFrame {
         addbtn = new javax.swing.JMenuItem();
         deletebtn = new javax.swing.JMenuItem();
         showAllbtn = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        showAll = new javax.swing.JMenuItem();
         malebtn = new javax.swing.JMenuItem();
         femalebtn = new javax.swing.JMenuItem();
 
@@ -53,6 +63,11 @@ public class PersonListGUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 102));
 
         nameList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        nameList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(nameList);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -61,28 +76,34 @@ public class PersonListGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel2.setText("Age:");
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 204, 102));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jRadioButton1.setText("Male");
-        jRadioButton1.setActionCommand("M");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        nameBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                nameBoxActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 204, 102));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jRadioButton2.setText("Female");
-        jRadioButton2.setActionCommand("F");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        optMale.setBackground(new java.awt.Color(255, 204, 102));
+        buttonGroup1.add(optMale);
+        optMale.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        optMale.setText("Male");
+        optMale.setActionCommand("M");
+        optMale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                optMaleActionPerformed(evt);
+            }
+        });
+
+        optFemale.setBackground(new java.awt.Color(255, 204, 102));
+        buttonGroup1.add(optFemale);
+        optFemale.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        optFemale.setText("Female");
+        optFemale.setActionCommand("F");
+        optFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optFemaleActionPerformed(evt);
             }
         });
 
@@ -92,9 +113,9 @@ public class PersonListGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jRadioButton1)
+                .addComponent(optMale)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
+                .addComponent(optFemale)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -102,8 +123,8 @@ public class PersonListGUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(optMale)
+                    .addComponent(optFemale))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -154,6 +175,7 @@ public class PersonListGUI extends javax.swing.JFrame {
 
         filebtn.setText("File");
 
+        exitbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/exit.png"))); // NOI18N
         exitbtn.setText("Exit");
         exitbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +188,8 @@ public class PersonListGUI extends javax.swing.JFrame {
 
         jMenu7.setText("Edit");
 
+        clearbtn.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        clearbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/exit.png"))); // NOI18N
         clearbtn.setText("Clear");
         clearbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +198,7 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         jMenu7.add(clearbtn);
 
+        addbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/insert.png"))); // NOI18N
         addbtn.setText("Add");
         addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +207,7 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         jMenu7.add(addbtn);
 
+        deletebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/delete.png"))); // NOI18N
         deletebtn.setText("Delete");
         deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,12 +220,25 @@ public class PersonListGUI extends javax.swing.JFrame {
 
         showAllbtn.setText("Filter");
 
-        jMenuItem1.setText("Show All");
-        showAllbtn.add(jMenuItem1);
+        showAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/all.png"))); // NOI18N
+        showAll.setText("Show All");
+        showAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showAllActionPerformed(evt);
+            }
+        });
+        showAllbtn.add(showAll);
 
+        malebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/male.png"))); // NOI18N
         malebtn.setText("Male");
+        malebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                malebtnActionPerformed(evt);
+            }
+        });
         showAllbtn.add(malebtn);
 
+        femalebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/female.png"))); // NOI18N
         femalebtn.setText("Female");
         femalebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,20 +265,41 @@ public class PersonListGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void optMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_optMaleActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void optFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optFemaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_optFemaleActionPerformed
 
     private void exitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitbtnActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitbtnActionPerformed
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
-        String name = nameBox.getText();
+        Person temp;
+        String name, gender;
+        int age;
+        try {
+            name = nameBox.getText();
+            age = Integer.parseInt(ageBox.getText());
+            gender = buttonGroup1.getSelection().getActionCommand();
+            if (gender.equals("M")) {
+                temp = new Person(name, gender, age);
+            } else {
+                temp = new Person(name, gender, age);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Must fill out form correctly");
+            return;
+        }
+
+        if (temp.setName(name) && temp.setAge(age)) {
+            people = temp;
+            clearForm();
+        }
+
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
@@ -247,12 +307,30 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_clearbtnActionPerformed
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_femalebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_deletebtnActionPerformed
+
+    private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
+
+    }//GEN-LAST:event_nameBoxActionPerformed
+
+    private void showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllActionPerformed
+
+    }//GEN-LAST:event_showAllActionPerformed
+
+    private void malebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malebtnActionPerformed
+
+    }//GEN-LAST:event_malebtnActionPerformed
+
+    private void nameListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameListMouseClicked
+        String name = nameList.getSelectedValue();
+        int loc = search(people, new Person(name, null, 0));
+        show(people.get(loc));
+    }//GEN-LAST:event_nameListMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -285,25 +363,14 @@ public class PersonListGUI extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void clearForm(){
+
+    public void clearForm() {
         nameBox.setText("");
         ageBox.setText("");
         buttonGroup1.clearSelection();
         nameList.clearSelection();
     }
-    
-    /*public void show(Person p){
-        nameBox.setText(p.getName());
-        ageBox.setText("" + p.getAge());
-        if(p.getGender()=="M"){
-            optmale.setSelected(true);
-        }
-        else{
-            optfemale.setSelect(true);
-        }
-    }*/
-    
+
     public static int findInsertPoint(ArrayList a, Object searchValue) {
         int left = 0;
         int right = a.size() - 1;
@@ -326,6 +393,24 @@ public class PersonListGUI extends javax.swing.JFrame {
         return midpoint;
     }
 
+    public static int search(ArrayList a, Object searchValue) {
+        int left = 0;
+        int right = a.size() - 1;
+        while (left <= right) {
+            int midpoint = (left + right) / 2;
+            int result = ((Comparable) a.get(midpoint)).compareTo(searchValue);
+            if (result == 0) {
+                return midpoint;
+            } else if (result < 0) {
+                left = midpoint + 1;
+            } else {
+                right = midpoint - 1;
+            }
+        }
+        return -1;
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addbtn;
     private javax.swing.JTextField ageBox;
@@ -339,15 +424,15 @@ public class PersonListGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem malebtn;
     private javax.swing.JTextField nameBox;
     private javax.swing.JList<String> nameList;
+    private javax.swing.JRadioButton optFemale;
+    private javax.swing.JRadioButton optMale;
+    private javax.swing.JMenuItem showAll;
     private javax.swing.JMenu showAllbtn;
     // End of variables declaration//GEN-END:variables
 }
