@@ -3,9 +3,10 @@ package Project10.assignments;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class searchGUI extends javax.swing.JFrame {
-    
+
     ISSStudent iss[] = new ISSStudent[100];
 
     public searchGUI() {
@@ -25,13 +26,13 @@ public class searchGUI extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     public static int search(Object[] a, Object searchValue) {
         int left = 0;
         int right = a.length - 1;
         while (left <= right) {
             int midpoint = (left + right) / 2;
-            int result = ((Comparable)a[midpoint]).compareTo(searchValue); //compare to gives you number 1, -1, 0
+            int result = ((Comparable) a[midpoint]).compareTo(searchValue); //compare to gives you number 1, -1, 0
             if (result == 0) { //if result is 0, then the two values are equal
                 return midpoint;
             } else if (result < 0) { //if result is less than 0 (-), then it shifts right
@@ -150,19 +151,25 @@ public class searchGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
-        
-        int id = Integer.parseInt(txtid.getText());
-        ISSStudent temp = new ISSStudent(null, null, id);
 
-        int result = search(iss, temp);
-        if (result >= 0) {
-            txtid.setEditable(false);
-            searchbtn.setEnabled(false);
-            display.setText(iss[result].toString() + "\n\n  Press CLEAR");
-        } else {
-            txtid.setEditable(false);
-            searchbtn.setEnabled(false);
-            display.setText(" STUDENT NOT FOUND.\n Please press CLEAR");
+        try {
+            int id = Integer.parseInt(txtid.getText());
+            ISSStudent temp = new ISSStudent(null, null, id);
+            int result = search(iss, temp);
+            if (result >= 0) {
+                txtid.setEditable(false);
+                searchbtn.setEnabled(false);
+                display.setText(iss[result].toString() + "\n\n  Press CLEAR");
+            } else {
+                txtid.setEditable(false);
+                searchbtn.setEnabled(false);
+                display.setText(" STUDENT NOT FOUND.\n Please press CLEAR");
+            }
+        } catch (Exception e) {
+            display.setText("");
+            txtid.setText("");
+            JOptionPane.showMessageDialog(this, "Must fill out form correctly");
+            return;
         }
         searchbtn.setEnabled(false);
     }//GEN-LAST:event_searchbtnActionPerformed
