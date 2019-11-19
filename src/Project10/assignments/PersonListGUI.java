@@ -278,7 +278,6 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitbtnActionPerformed
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
-        Person temp;
         String name, gender;
         int age;
         try {
@@ -286,20 +285,20 @@ public class PersonListGUI extends javax.swing.JFrame {
             age = Integer.parseInt(ageBox.getText());
             gender = buttonGroup1.getSelection().getActionCommand();
             if (gender.equals("M")) {
-                temp = new Person(name, gender, age);
+                optMale.setSelected(true);
             } else {
-                temp = new Person(name, gender, age);
+                optFemale.setSelected(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Must fill out form correctly");
             return;
         }
-
-        if (temp.setName(name) && temp.setAge(age)) {
-            people = temp;
-            clearForm();
-        }
-
+        
+        String newPerson = ""+people.add(new Person(name, gender, age));
+        int loc = findInsertPoint(people, newPerson);
+        people.add(loc, newPerson);
+        
+        
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed

@@ -54,8 +54,4 @@ public class Person implements Comparable{
             return true;
         }
     }
-
-    public final boolean setGender(){
-        boolean genderBlank = optmale.
-    }
 }
