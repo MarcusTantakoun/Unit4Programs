@@ -8,6 +8,9 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     ArrayList<Person> people = new ArrayList();
     DefaultListModel model = new DefaultListModel();
+    Person temp;
+    String name, gender;
+    int age;
 
     public PersonListGUI() {
         initComponents();
@@ -175,7 +178,6 @@ public class PersonListGUI extends javax.swing.JFrame {
 
         filebtn.setText("File");
 
-        exitbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/exit.png"))); // NOI18N
         exitbtn.setText("Exit");
         exitbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +191,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         jMenu7.setText("Edit");
 
         clearbtn.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        clearbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/exit.png"))); // NOI18N
         clearbtn.setText("Clear");
         clearbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +199,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         jMenu7.add(clearbtn);
 
-        addbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/insert.png"))); // NOI18N
         addbtn.setText("Add");
         addbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,7 +207,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         jMenu7.add(addbtn);
 
-        deletebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/delete.png"))); // NOI18N
         deletebtn.setText("Delete");
         deletebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +219,6 @@ public class PersonListGUI extends javax.swing.JFrame {
 
         showAllbtn.setText("Filter");
 
-        showAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/all.png"))); // NOI18N
         showAll.setText("Show All");
         showAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,7 +227,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         showAllbtn.add(showAll);
 
-        malebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/male.png"))); // NOI18N
         malebtn.setText("Male");
         malebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +235,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         });
         showAllbtn.add(malebtn);
 
-        femalebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/female.png"))); // NOI18N
         femalebtn.setText("Female");
         femalebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,8 +274,7 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitbtnActionPerformed
 
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
-        String name, gender;
-        int age;
+
         try {
             name = nameBox.getText();
             age = Integer.parseInt(ageBox.getText());
@@ -293,12 +288,11 @@ public class PersonListGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Must fill out form correctly");
             return;
         }
-        
-        String newPerson = ""+people.add(new Person(name, gender, age));
+
+        people.add(new Person(name, gender, age));
+        String newPerson = name;
         int loc = findInsertPoint(people, newPerson);
-        people.add(loc, newPerson);
-        
-        
+        model.add(loc, newPerson);
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
@@ -310,7 +304,11 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_femalebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
-
+        int loc = nameList.getSelectedIndex();
+        if (loc >= 0) {
+            people.remove(loc);
+            model.remove(loc);
+        }
     }//GEN-LAST:event_deletebtnActionPerformed
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
@@ -318,11 +316,19 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nameBoxActionPerformed
 
     private void showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllActionPerformed
-
+        nameList.setModel(model);
+        for (Person p : people) {
+            model.addElement(p.getName());
+        }
     }//GEN-LAST:event_showAllActionPerformed
 
     private void malebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malebtnActionPerformed
-
+        nameList.setModel(model);
+        if (gender.equals("M")) {
+            for (Person male : people) {
+                model.addElement(male.getName());
+            }
+        }
     }//GEN-LAST:event_malebtnActionPerformed
 
     private void nameListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameListMouseClicked
