@@ -35,7 +35,7 @@ public class Person implements Comparable{
         return name.compareTo(othername);
     }
     
-    public final boolean setName(String nm) {
+    /*public final boolean setName(String nm) {
         boolean nameBlank = nm.equals("");
         if (nameBlank) {
             return false;
@@ -53,5 +53,5 @@ public class Person implements Comparable{
             age = a;
             return true;
         }
-    }
+    }*/
 }
