@@ -11,10 +11,10 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     public PersonListGUI() {
         initComponents();
-        people.add(new Person("Bob", "M", 25));
-        people.add(new Person("Fran", "F", 55));
-        people.add(new Person("Mike", "M", 15));
-        people.add(new Person("Sue", "F", 30));
+        people.add(new Person("Bobby", "M", 25));
+        people.add(new Person("Franky", "F", 55));
+        people.add(new Person("Micheal", "M", 15));
+        people.add(new Person("Susan", "F", 30));
         nameList.setModel(model);
         for (Person p : people) {
             model.addElement(p.getName());
@@ -116,7 +116,7 @@ public class PersonListGUI extends javax.swing.JFrame {
                 .addComponent(optMale)
                 .addGap(18, 18, 18)
                 .addComponent(optFemale)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,25 +134,19 @@ public class PersonListGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addGap(22, 22, 22))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ageBox, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(nameBox))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ageBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,10 +288,14 @@ public class PersonListGUI extends javax.swing.JFrame {
         model.add(loc, p.getName());
 
         clearForm();
+        nameBox.setEditable(true);
+        ageBox.setEditable(true);
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
         clearForm();
+        nameBox.setEditable(true);
+        ageBox.setEditable(true);
     }//GEN-LAST:event_clearbtnActionPerformed
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
@@ -316,6 +314,8 @@ public class PersonListGUI extends javax.swing.JFrame {
             model.remove(loc);
         }
         clearForm();
+        nameBox.setEditable(true);
+        ageBox.setEditable(true);
     }//GEN-LAST:event_deletebtnActionPerformed
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
@@ -343,6 +343,8 @@ public class PersonListGUI extends javax.swing.JFrame {
         String name = nameList.getSelectedValue();
         int loc = search(people, new Person(name, null, 0));
         show(people.get(loc));
+        nameBox.setEditable(false);
+        ageBox.setEditable(false);
     }//GEN-LAST:event_nameListMouseClicked
 
     public static void main(String args[]) {
