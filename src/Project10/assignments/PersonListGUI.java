@@ -301,7 +301,12 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_clearbtnActionPerformed
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
-
+        model.clear();
+        for(int loc = 0; loc < people.size(); loc ++) {
+            if (people.get(loc).getGender().equals("F")) {
+                model.addElement(people.get(loc).getName());
+            }
+        }
     }//GEN-LAST:event_femalebtnActionPerformed
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
@@ -318,6 +323,7 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nameBoxActionPerformed
 
     private void showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllActionPerformed
+        model.clear();
         nameList.setModel(model);
         for (Person p : people) {
             model.addElement(p.getName());
@@ -325,12 +331,10 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_showAllActionPerformed
 
     private void malebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malebtnActionPerformed
-        Person p = new Person(null, null, 0);
-        int loc = search(people, p);
         model.clear();
-        if(p.getGender().equals("M")){
-            for (Person male : people) {
-                model.add(loc,male);
+        for(int loc = 0; loc < people.size(); loc ++) {
+            if (people.get(loc).getGender().equals("M")) {
+                model.addElement(people.get(loc).getName());
             }
         }
     }//GEN-LAST:event_malebtnActionPerformed
@@ -352,28 +356,24 @@ public class PersonListGUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(PersonListGUI.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(PersonListGUI.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(PersonListGUI.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PersonListGUI.class
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -396,10 +396,8 @@ public class PersonListGUI extends javax.swing.JFrame {
         int left = 0;
         int right = a.size() - 1;
         int midpoint = 0;
-
         while (left <= right) {
             midpoint = (left + right) / 2;
-
             int result = ((Comparable) a.get(midpoint)).compareTo(searchValue);
 
             if (result < 0) {
@@ -429,7 +427,6 @@ public class PersonListGUI extends javax.swing.JFrame {
             }
         }
         return -1;
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
