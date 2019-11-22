@@ -13,11 +13,8 @@ public class sortGUI extends javax.swing.JFrame {
         model = new DefaultListModel();
         numberList.setModel(model); //connects model to list
         //all sorting buttons are disabled
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
         clearListbtn.setEnabled(false);
+        disableButtons();
     }
 
     @SuppressWarnings("unchecked")
@@ -274,10 +271,7 @@ public class sortGUI extends javax.swing.JFrame {
         timebox.setText("" + duration + " ms"); //print time box
 
         //disable all buttons - forces user to clear list or quit
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
+        disableButtons();
     }//GEN-LAST:event_bubbleSortActionPerformed
 
     private void selectionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionSortActionPerformed
@@ -291,10 +285,7 @@ public class sortGUI extends javax.swing.JFrame {
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
 
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
+        disableButtons();
     }//GEN-LAST:event_selectionSortActionPerformed
 
     private void insertionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertionSortActionPerformed
@@ -308,10 +299,7 @@ public class sortGUI extends javax.swing.JFrame {
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
 
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
+        disableButtons();
     }//GEN-LAST:event_insertionSortActionPerformed
 
     private void recursionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recursionSortActionPerformed
@@ -325,10 +313,7 @@ public class sortGUI extends javax.swing.JFrame {
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
 
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
+        disableButtons();
     }//GEN-LAST:event_recursionSortActionPerformed
 
     private void clearListbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearListbtnActionPerformed
@@ -336,14 +321,10 @@ public class sortGUI extends javax.swing.JFrame {
         model.clear();
         model = new DefaultListModel();
         numberList.setModel(model);
-        generatebtn.setEnabled(true);
         timebox.setText("");
-        
-        selectionSort.setEnabled(false);
-        insertionSort.setEnabled(false);
-        bubbleSort.setEnabled(false);
-        recursionSort.setEnabled(false);
+        disableButtons();
         clearListbtn.setEnabled(false);
+        generatebtn.setEnabled(true);
     }//GEN-LAST:event_clearListbtnActionPerformed
 
     private void timeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeboxActionPerformed
@@ -450,6 +431,13 @@ public class sortGUI extends javax.swing.JFrame {
         }
         quickSort(a, left, j);
         quickSort(a, i, right);
+    }
+    
+    public void disableButtons(){
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        recursionSort.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
