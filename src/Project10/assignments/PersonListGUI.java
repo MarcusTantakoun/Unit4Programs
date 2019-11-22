@@ -282,10 +282,18 @@ public class PersonListGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Must fill out form correctly");
             return;
         }
+        //make person
         Person p = new Person(name, gender, age);
-        int loc = findInsertPoint(people, p);
-        people.add(loc, p);
-        model.add(loc, p.getName());
+        //read through list, if it has same name, don't print
+        for (int i = 0; i < people.size(); i++) {
+            if (p.getName().equals(people)) {
+                JOptionPane.showMessageDialog(this, "ERROR. New person must have unique name");
+            } else {
+                int loc = findInsertPoint(people, p);
+                people.add(loc, p);
+                model.add(loc, p.getName());
+            }
+        }
 
         clearForm();
         nameBox.setEditable(true);
@@ -300,7 +308,7 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
         model.clear();
-        for(int loc = 0; loc < people.size(); loc ++) {
+        for (int loc = 0; loc < people.size(); loc++) {
             if (people.get(loc).getGender().equals("F")) {
                 model.addElement(people.get(loc).getName());
             }
@@ -331,7 +339,7 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     private void malebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malebtnActionPerformed
         model.clear();
-        for(int loc = 0; loc < people.size(); loc ++) {
+        for (int loc = 0; loc < people.size(); loc++) {
             if (people.get(loc).getGender().equals("M")) {
                 model.addElement(people.get(loc).getName());
             }
