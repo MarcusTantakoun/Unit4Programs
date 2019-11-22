@@ -16,7 +16,7 @@ public class sortGUI extends javax.swing.JFrame {
         selectionSort.setEnabled(false);
         insertionSort.setEnabled(false);
         bubbleSort.setEnabled(false);
-        quickSort.setEnabled(false);
+        recursionSort.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +35,7 @@ public class sortGUI extends javax.swing.JFrame {
         insertionSort = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        quickSort = new javax.swing.JButton();
+        recursionSort = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         clearListbtn = new javax.swing.JButton();
         quitbtn = new javax.swing.JButton();
@@ -124,10 +124,10 @@ public class sortGUI extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Recursion");
 
-        quickSort.setText("Quick Sort");
-        quickSort.addActionListener(new java.awt.event.ActionListener() {
+        recursionSort.setText("Quick Sort");
+        recursionSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quickSortActionPerformed(evt);
+                recursionSortActionPerformed(evt);
             }
         });
 
@@ -139,7 +139,7 @@ public class sortGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(quickSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(recursionSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,7 +148,7 @@ public class sortGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(quickSort)
+                .addComponent(recursionSort)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -250,7 +250,7 @@ public class sortGUI extends javax.swing.JFrame {
         selectionSort.setEnabled(true);
         insertionSort.setEnabled(true);
         bubbleSort.setEnabled(true);
-        quickSort.setEnabled(true);
+        recursionSort.setEnabled(true);
     }//GEN-LAST:event_generatebtnActionPerformed
 
     private void quitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitbtnActionPerformed
@@ -270,12 +270,12 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms"); //print time box
-        
+
         //disable all buttons - forces user to clear list or quit
         selectionSort.setEnabled(false);
         insertionSort.setEnabled(false);
         bubbleSort.setEnabled(false);
-        quickSort.setEnabled(false);
+        recursionSort.setEnabled(false);
     }//GEN-LAST:event_bubbleSortActionPerformed
 
     private void selectionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionSortActionPerformed
@@ -288,11 +288,11 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
-        
+
         selectionSort.setEnabled(false);
         insertionSort.setEnabled(false);
         bubbleSort.setEnabled(false);
-        quickSort.setEnabled(false);
+        recursionSort.setEnabled(false);
     }//GEN-LAST:event_selectionSortActionPerformed
 
     private void insertionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertionSortActionPerformed
@@ -305,16 +305,29 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
-        
+
         selectionSort.setEnabled(false);
         insertionSort.setEnabled(false);
         bubbleSort.setEnabled(false);
-        quickSort.setEnabled(false);
+        recursionSort.setEnabled(false);
     }//GEN-LAST:event_insertionSortActionPerformed
 
-    private void quickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickSortActionPerformed
+    private void recursionSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recursionSortActionPerformed
+        model.clear();
+        long startTime = System.nanoTime();
+        quickSort(nums,0,nums.length-1);
+        for (int i = 0; i < 50000; i++) {
+            model.addElement(nums[i]);
+        }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;
+        timebox.setText("" + duration + " ms");
 
-    }//GEN-LAST:event_quickSortActionPerformed
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        recursionSort.setEnabled(false);
+    }//GEN-LAST:event_recursionSortActionPerformed
 
     private void clearListbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearListbtnActionPerformed
         //resets whole code
@@ -326,7 +339,7 @@ public class sortGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_clearListbtnActionPerformed
 
     private void timeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeboxActionPerformed
-        
+
     }//GEN-LAST:event_timeboxActionPerformed
 
     public static void main(String args[]) {
@@ -336,16 +349,6 @@ public class sortGUI extends javax.swing.JFrame {
                 new sortGUI().setVisible(true);
             }
         });
-    }
-
-    public static void selectionSort(int[] a) {
-        for (int i = 0; i < a.length - 1; i++) {
-            int minIndex = findMinimum(a, i);
-            if (minIndex != i) //if lowest is not already in place
-            {
-                swap(a, i, minIndex);
-            }
-        } //end for
     }
 
 //supporting findMinimum method
@@ -361,7 +364,6 @@ public class sortGUI extends javax.swing.JFrame {
         return minIndex;
     }
 
-//supporting swap method (same as bubble sort swap)
     public static void swap(int[] a, int x, int y) {
         int temp = a[x];
         a[x] = a[y];
@@ -381,15 +383,24 @@ public class sortGUI extends javax.swing.JFrame {
                 if (a[j] > a[j + 1]) {
                     swap(a, j, j + 1);
                     exchangeMade = true;
-                }//end if
-            }//end for
-        }//end while
+                }
+            }
+        }
+    }
+    
+    public static void selectionSort(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            int minIndex = findMinimum(a, i);
+            if (minIndex != i)
+            {
+                swap(a, i, minIndex);
+            }
+        }
     }
 
     public static void insertionSort(int a[]) {
         int itemToInsert, j;
         boolean stillLooking;
-
         //on the kth pass, pass item k upwards in list
         //and insert it in its proper place amoung the
         //first k entries in an array
@@ -407,11 +418,31 @@ public class sortGUI extends javax.swing.JFrame {
                 } else {
                     //we have found new home for a[k];
                     stillLooking = false;
-                }//end else// j+1 is where the item goes
+                }
                 a[j + 1] = itemToInsert;
-            }//end while
-        }//end for
-    }//end method
+            }
+        }
+    }
+    
+    public static void quickSort(int[] a, int left, int right) {
+        if (left >= right) return;
+        int i = left;
+        int j = right;
+        int pivotValue = a[(left + right) / 2];
+        while (i < j) {
+            while (a[i] < pivotValue) i++;
+            while (pivotValue < a[j]) j--;
+            if (i <= j) {
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        quickSort(a, left, j);
+        quickSort(a, i, right);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bubbleSort;
@@ -426,8 +457,8 @@ public class sortGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> numberList;
-    private javax.swing.JButton quickSort;
     private javax.swing.JButton quitbtn;
+    private javax.swing.JButton recursionSort;
     private javax.swing.JButton selectionSort;
     private javax.swing.JTextField timebox;
     // End of variables declaration//GEN-END:variables

@@ -222,7 +222,7 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" pref="117" max="32767" attributes="0"/>
-                          <Component id="quickSort" max="32767" attributes="0"/>
+                          <Component id="recursionSort" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
@@ -234,7 +234,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="quickSort" min="-2" max="-2" attributes="0"/>
+                      <Component id="recursionSort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -247,12 +247,12 @@
                 <Property name="text" type="java.lang.String" value="Recursion"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="quickSort">
+            <Component class="javax.swing.JButton" name="recursionSort">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Quick Sort"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quickSortActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recursionSortActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

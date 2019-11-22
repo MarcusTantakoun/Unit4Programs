@@ -324,7 +324,6 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     private void showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllActionPerformed
         model.clear();
-        nameList.setModel(model);
         for (Person p : people) {
             model.addElement(p.getName());
         }
