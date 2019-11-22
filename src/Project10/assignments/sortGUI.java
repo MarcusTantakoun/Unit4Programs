@@ -17,6 +17,7 @@ public class sortGUI extends javax.swing.JFrame {
         insertionSort.setEnabled(false);
         bubbleSort.setEnabled(false);
         recursionSort.setEnabled(false);
+        clearListbtn.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -251,6 +252,7 @@ public class sortGUI extends javax.swing.JFrame {
         insertionSort.setEnabled(true);
         bubbleSort.setEnabled(true);
         recursionSort.setEnabled(true);
+        clearListbtn.setEnabled(true);
     }//GEN-LAST:event_generatebtnActionPerformed
 
     private void quitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitbtnActionPerformed
@@ -336,6 +338,12 @@ public class sortGUI extends javax.swing.JFrame {
         numberList.setModel(model);
         generatebtn.setEnabled(true);
         timebox.setText("");
+        
+        selectionSort.setEnabled(false);
+        insertionSort.setEnabled(false);
+        bubbleSort.setEnabled(false);
+        recursionSort.setEnabled(false);
+        clearListbtn.setEnabled(false);
     }//GEN-LAST:event_clearListbtnActionPerformed
 
     private void timeboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeboxActionPerformed
