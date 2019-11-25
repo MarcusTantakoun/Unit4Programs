@@ -158,9 +158,9 @@ public class PersonListGUI extends javax.swing.JFrame {
                             .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(ageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,30 +280,32 @@ public class PersonListGUI extends javax.swing.JFrame {
             gender = buttonGroup1.getSelection().getActionCommand();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Must fill out form correctly");
+            clearForm();
             return;
         }
         //make person
         Person p = new Person(name, gender, age);
         //read through list, if it has same name, don't print
         for (int i = 0; i < people.size(); i++) {
-            if (p.getName().equals(people)) {
+            if (people.get(i).getName().equals(p.getName())) {
                 JOptionPane.showMessageDialog(this, "ERROR. New person must have unique name");
-            } else {
-                int loc = findInsertPoint(people, p);
-                people.add(loc, p);
-                model.add(loc, p.getName());
+                int loc = search(people, p);
+                if (loc >= 0) {
+                    people.remove(loc);
+                    model.remove(loc);
+                }
             }
         }
-
+        int loc = findInsertPoint(people, p);
+        people.add(loc, p);
+        model.add(loc, p.getName());
         clearForm();
-        nameBox.setEditable(true);
-        ageBox.setEditable(true);
+        enablebtn();
     }//GEN-LAST:event_addbtnActionPerformed
 
     private void clearbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtnActionPerformed
         clearForm();
-        nameBox.setEditable(true);
-        ageBox.setEditable(true);
+        enablebtn();
     }//GEN-LAST:event_clearbtnActionPerformed
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
@@ -322,8 +324,7 @@ public class PersonListGUI extends javax.swing.JFrame {
             model.remove(loc);
         }
         clearForm();
-        nameBox.setEditable(true);
-        ageBox.setEditable(true);
+        enablebtn();
     }//GEN-LAST:event_deletebtnActionPerformed
 
     private void nameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameBoxActionPerformed
@@ -350,8 +351,11 @@ public class PersonListGUI extends javax.swing.JFrame {
         String name = nameList.getSelectedValue();
         int loc = search(people, new Person(name, null, 0));
         show(people.get(loc));
+        optMale.setEnabled(false);
+        optFemale.setEnabled(false);
         nameBox.setEditable(false);
         ageBox.setEditable(false);
+        
     }//GEN-LAST:event_nameListMouseClicked
 
     public static void main(String args[]) {
@@ -399,6 +403,13 @@ public class PersonListGUI extends javax.swing.JFrame {
         ageBox.setText("");
         buttonGroup1.clearSelection();
         nameList.clearSelection();
+    }
+    
+    public void enablebtn(){
+        nameBox.setEditable(true);
+        ageBox.setEditable(true);
+        optMale.setEnabled(true);
+        optFemale.setEnabled(true);
     }
 
     public static int findInsertPoint(ArrayList a, Object searchValue) {
