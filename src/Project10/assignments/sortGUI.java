@@ -269,7 +269,6 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms"); //print time box
-
         //disable all buttons - forces user to clear list or quit
         disableButtons();
     }//GEN-LAST:event_bubbleSortActionPerformed
@@ -284,7 +283,6 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
-
         disableButtons();
     }//GEN-LAST:event_selectionSortActionPerformed
 
@@ -298,7 +296,6 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
-
         disableButtons();
     }//GEN-LAST:event_insertionSortActionPerformed
 
@@ -312,7 +309,6 @@ public class sortGUI extends javax.swing.JFrame {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1000000;
         timebox.setText("" + duration + " ms");
-
         disableButtons();
     }//GEN-LAST:event_recursionSortActionPerformed
 
