@@ -8,6 +8,8 @@ public class PersonListGUI extends javax.swing.JFrame {
 
     ArrayList<Person> people = new ArrayList();
     DefaultListModel model = new DefaultListModel();
+    boolean isFemale = true;
+    boolean isMale = true;
 
     public PersonListGUI() {
         initComponents();
@@ -167,6 +169,9 @@ public class PersonListGUI extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
         filebtn.setText("File");
 
         exitbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Project10/assignments/exit.png"))); // NOI18N
@@ -276,10 +281,20 @@ public class PersonListGUI extends javax.swing.JFrame {
         int age;
         try {
             name = nameBox.getText();
+            if ((name.substring(0, name.length()).matches(".*\\d.*"))) { //program detects if a number is inputted
+                JOptionPane.showMessageDialog(this, "ERROR. Name contains a number, please try again.");
+                clearForm();
+                return;
+            }
             age = Integer.parseInt(ageBox.getText());
             gender = buttonGroup1.getSelection().getActionCommand();
+            if ((gender.equals("F") && isMale == true) || (gender.equals("M") && isFemale == true)) {
+                JOptionPane.showMessageDialog(this, "ERROR. Cannot insert opposite gender in list. Try again");
+                clearForm();
+                return;
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Must fill out form correctly");
+            JOptionPane.showMessageDialog(this, "Must fill out form properly");
             clearForm();
             return;
         }
@@ -289,11 +304,8 @@ public class PersonListGUI extends javax.swing.JFrame {
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).getName().equals(p.getName())) {
                 JOptionPane.showMessageDialog(this, "ERROR. New person must have unique name");
-                int loc = search(people, p);
-                if (loc >= 0) {
-                    people.remove(loc);
-                    model.remove(loc);
-                }
+                clearForm();
+                return;
             }
         }
         int loc = findInsertPoint(people, p);
@@ -309,7 +321,10 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_clearbtnActionPerformed
 
     private void femalebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femalebtnActionPerformed
+        isFemale = true;
+        isMale = false;
         model.clear();
+        clearForm();
         for (int loc = 0; loc < people.size(); loc++) {
             if (people.get(loc).getGender().equals("F")) {
                 model.addElement(people.get(loc).getName());
@@ -339,7 +354,10 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_showAllActionPerformed
 
     private void malebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malebtnActionPerformed
+        isFemale = false;
+        isMale = true;
         model.clear();
+        clearForm();
         for (int loc = 0; loc < people.size(); loc++) {
             if (people.get(loc).getGender().equals("M")) {
                 model.addElement(people.get(loc).getName());
@@ -355,7 +373,6 @@ public class PersonListGUI extends javax.swing.JFrame {
         optFemale.setEnabled(false);
         nameBox.setEditable(false);
         ageBox.setEditable(false);
-        
     }//GEN-LAST:event_nameListMouseClicked
 
     public static void main(String args[]) {
@@ -404,8 +421,8 @@ public class PersonListGUI extends javax.swing.JFrame {
         buttonGroup1.clearSelection();
         nameList.clearSelection();
     }
-    
-    public void enablebtn(){
+
+    public void enablebtn() {
         nameBox.setEditable(true);
         ageBox.setEditable(true);
         optMale.setEnabled(true);
