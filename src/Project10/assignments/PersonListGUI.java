@@ -281,14 +281,20 @@ public class PersonListGUI extends javax.swing.JFrame {
         int age;
         try {
             name = nameBox.getText();
-            if ((name.substring(0, name.length()).matches(".*\\d.*"))) { //program detects if a number is inputted
-                JOptionPane.showMessageDialog(this, "ERROR. Name contains a number, please try again.");
+            boolean hasUpperCase = !name.substring(0).equals(name.toLowerCase());
+            if ((name.substring(0, name.length()).matches(".*\\d.*")) || !hasUpperCase) { //program detects if a number is inputted
+                JOptionPane.showMessageDialog(this, "ERROR. Name either contains a number or a lowercase, please try again.");
                 clearForm();
                 return;
             }
             age = Integer.parseInt(ageBox.getText());
+            if(age < 0 && age > 100){
+                JOptionPane.showMessageDialog(this, "ERROR. Incorrect age given");
+                clearForm();
+                return;
+            }
             gender = buttonGroup1.getSelection().getActionCommand();
-            if ((gender.equals("F") && isMale == true) || (gender.equals("M") && isFemale == true)) {
+            if ((gender.equals("F") && isMale == true && !isFemale) || (gender.equals("M") && isFemale == true && !isMale)) {
                 JOptionPane.showMessageDialog(this, "ERROR. Cannot insert opposite gender in list. Try again");
                 clearForm();
                 return;
@@ -347,6 +353,8 @@ public class PersonListGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nameBoxActionPerformed
 
     private void showAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showAllActionPerformed
+        isFemale = true;
+        isMale = true;
         model.clear();
         for (Person p : people) {
             model.addElement(p.getName());
