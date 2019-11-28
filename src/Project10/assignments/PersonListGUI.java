@@ -265,11 +265,11 @@ public class PersonListGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void optMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optMaleActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_optMaleActionPerformed
 
     private void optFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optFemaleActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_optFemaleActionPerformed
 
     private void exitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitbtnActionPerformed
@@ -279,31 +279,36 @@ public class PersonListGUI extends javax.swing.JFrame {
     private void addbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbtnActionPerformed
         String name, gender;
         int age;
+        //read names in, catch is used if user left an empty box
         try {
             name = nameBox.getText();
-            boolean hasUpperCase = !name.substring(0).equals(name.toLowerCase());
-            if ((name.substring(0, name.length()).matches(".*\\d.*")) || !hasUpperCase) { //program detects if a number is inputted
-                JOptionPane.showMessageDialog(this, "ERROR. Name either contains a number or a lowercase, please try again.");
-                clearForm();
-                return;
-            }
             age = Integer.parseInt(ageBox.getText());
-            if(age < 0 && age > 100){
-                JOptionPane.showMessageDialog(this, "ERROR. Incorrect age given");
-                clearForm();
-                return;
-            }
             gender = buttonGroup1.getSelection().getActionCommand();
-            if ((gender.equals("F") && isMale == true && !isFemale) || (gender.equals("M") && isFemale == true && !isMale)) {
-                JOptionPane.showMessageDialog(this, "ERROR. Cannot insert opposite gender in list. Try again");
-                clearForm();
-                return;
-            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Must fill out form properly");
             clearForm();
             return;
         }
+        //this prevents user from using lowercase
+        boolean hasUpperCase = !name.substring(0).equals(name.toLowerCase());
+        //if string detects a number, print error
+            if ((name.substring(0, name.length()).matches(".*\\d.*")) || !hasUpperCase) { //program detects if a number is inputted
+                JOptionPane.showMessageDialog(this, "ERROR. Name either contains a number or a lowercase, please try again.");
+                clearForm();
+                return;
+            }
+            //if int (age) is less than 0 or more than 100, print error
+        if(age < 1 || age > 100){
+                JOptionPane.showMessageDialog(this, "ERROR. Incorrect age given");
+                clearForm();
+                return;
+            }
+        //if the user inputs a gender in the wrong category, force them to
+        if ((gender.equals("F") && isMale == true && !isFemale) || (gender.equals("M") && isFemale == true && !isMale)) {
+                JOptionPane.showMessageDialog(this, "ERROR. Cannot insert opposite gender in list. Try again");
+                clearForm();
+                return;
+            }
         //make person
         Person p = new Person(name, gender, age);
         //read through list, if it has same name, don't print
@@ -314,6 +319,7 @@ public class PersonListGUI extends javax.swing.JFrame {
                 return;
             }
         }
+        //read through list and insert
         int loc = findInsertPoint(people, p);
         people.add(loc, p);
         model.add(loc, p.getName());

@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Project11.assignments;
 
-/**
- *
- * @author marc6250
- */
 public class Simpsons {
+    
+    static String start[] = {"Simpsons in cave", "Lisa Trapped with Burns",
+        "Burns at Moe's", "Moe with Edna", "Edna in school"};
+    
+    static String end[] = {"Simpsons leave cave", "Lisa takes picture with Burns",
+        "Burns gets gold", "Moe puts gold in machine", "Edna stays on as teacher"};
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+    }
+    
+    public static void Story(int index){
+        System.out.print(start[index]);
+        if(index < start.length - 1)
+            Story(index+1);
+        System.out.println(end[index]);
     }
     
 }
