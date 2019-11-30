@@ -10,11 +10,11 @@ public class Simpsons {
         "Burns gets gold", "Moe puts gold in machine", "Edna stays on as teacher"};
 
     public static void main(String[] args) {
-        
+        Story(0);
     }
     
     public static void Story(int index){
-        System.out.print(start[index]);
+        System.out.println(start[index]);
         if(index < start.length - 1)
             Story(index+1);
         System.out.println(end[index]);
